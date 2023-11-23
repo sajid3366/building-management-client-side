@@ -2,11 +2,14 @@ import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Signup = () => {
-    const { signUp} = useAuth();
+    const { signUp } = useAuth();
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const axiosPublic = useAxiosPublic()
 
     const handleSignup = e => {
         e.preventDefault();
@@ -46,18 +49,10 @@ const Signup = () => {
                     name, email, password, photo
                 }
                 console.log(user);
-                fetch('https://online-group-study-server-gamma.vercel.app/user', {
-                    method: "POST",
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(user)
-
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log(data);
-                        if (data.insertedId) {
+                axiosPublic.post('/users', user)
+                    .then(res => {
+                        console.log('user', res.data);
+                        if (res.data.insertedId) {
                             Swal.fire({
                                 title: 'Success!',
                                 text: 'User Created successfully',

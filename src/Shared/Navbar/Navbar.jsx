@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import { MdLogin, MdOutlineLogout } from "react-icons/md";
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
@@ -9,9 +10,9 @@ const Navbar = () => {
     }
     return (
         <nav className=" lg:flex justify-between py-1 items-center px-4 h-[100%] ">
-            <div>
+            <div className="flex justify-center">
                 <Link to="/">
-                    <img className='w-full lg:w-[200px] cursor-pointer' src="https://i.ibb.co/pfhtbzx/study-corner.png" alt="" />
+                    <img className='w-[250px] lg:w-[200px] h-[80px] py-2 cursor-pointer' src="https://i.ibb.co/5Lc8cBw/smart-home.png" alt="" />
                 </Link>
             </div>
 
@@ -28,33 +29,13 @@ const Navbar = () => {
 
                     </li>
                     <li>
-                        <NavLink to="/createassignments" className={({ isActive, isPending }) =>
+                        <NavLink to="/apartment" className={({ isActive, isPending }) =>
                             isActive ? "text-[#FF444A] underline font-bold" : isPending ? "pending" : ""
                         }>
-                            Create Assignments
+                            Apartment
                         </NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/assignments" className={({ isActive, isPending }) =>
-                            isActive ? "text-[#FF444A] underline font-bold" : isPending ? "pending" : ""
-                        }>
-                            Assignments
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/myassignments" className={({ isActive, isPending }) =>
-                            isActive ? "text-[#FF444A] underline font-bold" : isPending ? "pending" : ""
-                        }>
-                            My Assignments
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/submittedassignments" className={({ isActive, isPending }) =>
-                            isActive ? "text-[#FF444A] underline font-bold" : isPending ? "pending" : ""
-                        }>
-                            Submitted Assignments
-                        </NavLink>
-                    </li>
+                    
 
                 </ul>
                 <div className="mt-5 lg:ml-10 flex justify-center items-center gap-2 lg:mt-0 py-2">
@@ -65,20 +46,27 @@ const Navbar = () => {
 
                                 <div className="flex gap-2 items-center">
 
-                                    <div className="relative group cursor-pointer">
-                                        <img src={user.photoURL} alt="Your Image" className="w-[40px] h-[40px] rounded-full group-hover:opacity-50" />
-                                        <div className="absolute w-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                                            <p className="text-black text-lg ">{user.displayName}</p>
-                                        </div>
+                                    <div className="dropdown dropdown-end">
+                                        <img tabIndex={0} src={user?.photoURL} className="w-[40px] h-[40px] rounded-full cursor-pointer" alt="" />
+                                        <ul tabIndex={0} className="dropdown-content  py-8  z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                            <div className="flex-col justify-center text-center space-y-3">
+                                                <h2 className="text-lg font-bold">{user.displayName}</h2>
+                                                <div>
+                                                    <NavLink className="btn btn-outline" to="/dashboard">Dashboard</NavLink>
+                                                </div>
+                                                <div className="flex justify-center">
+                                                    <button onClick={handleLogout} className="flex gap-2 justify-center items-center btn btn-outline">Logout<MdOutlineLogout></MdOutlineLogout></button>
+                                                </div>
+                                            </div>
+
+                                        </ul>
                                     </div>
-                                    <div>
-                                        <button onClick={handleLogout} className="  ml-2 bg-slate-300 rounded-sm  text-black px-4 py-2">Logout</button>
-                                    </div>
+
 
                                 </div>
                             </>
                                 : <div className="w-1/3  items-center">
-                                    <NavLink to='/login'><button className="bg-slate-300 rounded-sm text-black  px-4 py-2">Login</button></NavLink>
+                                    <NavLink to='/login'><MdLogin className="text-3xl"></MdLogin></NavLink>
                                 </div>
                         }
                     </div>
