@@ -1,8 +1,10 @@
+import { EmblaCarousel } from "./Carousel";
 
 const Banner = () => {
+
     return (
-        <div>
-            this is for banner section
+        <div className="my-10">
+            <EmblaCarousel></EmblaCarousel>
         </div>
     );
 };
