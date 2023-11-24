@@ -5,6 +5,7 @@ import Signup from "../Pages/Signup/Signup";
 import Home from "../Pages/Home/Home/Home";
 import Apartment from "../Pages/Apartment/Apartment";
 import Dashboard from "../Layout/Dashboard";
+import PrivateRoute from "../Providers/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'apartment',
-                element: <Apartment></Apartment>
+                element: <PrivateRoute><Apartment></Apartment></PrivateRoute>
             },
             
             {
