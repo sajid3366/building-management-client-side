@@ -1,19 +1,15 @@
-import { Link } from "react-router-dom";
 import useAllApartment from "../../hooks/useAllApartment";
-import Button from "../../Shared/Button/Button";
 import { useEffect, useState } from "react";
+import ApartmentCard from "./ApartmentCard";
 
 const Apartment = () => {
     const [loadedApartments] = useAllApartment();
-    // console.log(loadedApartments);
     const [apartments, setApartments] = useState(loadedApartments)
     const [apartmentPerPage, setapArtmentPerPage] = useState(6)
     const [currentPage, setCurrentPage] = useState(0);
     const [count, setCount] = useState(0);
     const numOfPages = Math.ceil(count / apartmentPerPage);
-    console.log('num of pages', numOfPages);
     const pages = [...Array(numOfPages).keys()]
-
 
     useEffect(() => {
         fetch(`http://localhost:5000/countApartment`)
@@ -55,21 +51,7 @@ const Apartment = () => {
             <hr className="max-w-lg border-2 mx-auto mb-10" />
             <div className="grid grid-cols-3 gap-5">
                 {
-                    apartments.map(apartment => (
-                        <div key={apartment._id} className="rounded-sm">
-                            <figure><img className="w-full rounded-sm h-[250px]" src={apartment.apartmentImage} alt="Apartment Image" /></figure>
-                            <div className="px-5 my-4 space-y-2">
-                                <h2 className="text-2xl font-bold">{apartment.blockName}</h2>
-                                <p className="text-lg font-medium">Floor no - {apartment.floorNo}</p>
-                                <p className="text-lg font-medium">Apartment no - {apartment.apartmentNo}</p>
-                                <hr className="my-2 border-2" />
-                                <div className="card-actions justify-between ">
-                                    <p className="text-xl text-[#A1A1A1] font-semibold">${apartment.rent}</p>
-                                    <Link to={`/agreement/${apartment._id}`}><Button title={"Agreement"}></Button></Link>
-                                </div>
-                            </div>
-                        </div>
-                    ))
+                    apartments.map(apartment => <ApartmentCard key={apartment._id} apartment={apartment}></ApartmentCard> )
                 }
             </div>
             <div className='text-center my-16'>
@@ -83,10 +65,10 @@ const Apartment = () => {
                 }
                 <button onClick={handleNextPage} className="btn border-2 border-gray-200">Next</button>
                 <select className="ml-2 w-14 h-12 text-lg rounded-md" value={apartmentPerPage} onChange={handlePagination} name="" id="">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="50">50</option>
+                    <option value="5">6</option>
+                    <option value="10">12</option>
+                    <option value="20">24</option>
+                    <option value="50">48</option>
                 </select>
             </div>
         </div>
