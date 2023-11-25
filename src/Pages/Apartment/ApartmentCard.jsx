@@ -9,7 +9,7 @@ const ApartmentCard = ({ apartment }) => {
     const axiosSecure = useAxiosSecure();
 
 
-    const handleAgreement = id => {
+    const handleAgreement = () => {
         if (user && user.email) {
             const newAgreement = {
                 name: user?.displayName,
@@ -20,7 +20,7 @@ const ApartmentCard = ({ apartment }) => {
                 rent,
                 status: 'pending'
             }
-            console.log(newAgreement);
+            // console.log(newAgreement);
             axiosSecure.post('/agreement', newAgreement)
                 .then(res => {
                     if (res.data.insertedId) {
@@ -34,8 +34,6 @@ const ApartmentCard = ({ apartment }) => {
                     }
                 })
 
-            console.log('id', id);
-
         }
     }
     return (
@@ -48,7 +46,7 @@ const ApartmentCard = ({ apartment }) => {
                 <hr className="my-2 border-2" />
                 <div className="card-actions justify-between ">
                     <p className="text-xl text-[#A1A1A1] font-semibold">${rent}</p>
-                    <div className="cursor-pointer" onClick={() => handleAgreement(_id)}>
+                    <div onClick={() => handleAgreement(_id)}>
                         <Button title={"Agreement"} ></Button>
                     </div>
                 </div>
