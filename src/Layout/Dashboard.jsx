@@ -1,15 +1,20 @@
 // import { Helmet } from "react-helmet";
-import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaUsers, FaUtensils } from "react-icons/fa";
+import { FaAd, FaCalendar, FaEnvelope, FaHome, FaList, FaUsers } from "react-icons/fa";
 import { FaAlignJustify } from "react-icons/fa6";
+import { RiCoupon4Fill } from "react-icons/ri";
 import { ImProfile } from "react-icons/im";
 import { GrAnnounce } from "react-icons/gr";
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../hooks/useAdmin";
+import useMember from "../hooks/useMember";
 // import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
     // const [isAdmin] = useAdmin();
-    const isAdmin = true;
-    console.log(isAdmin);
+    const [isAdmin] = useAdmin();
+    const [isMember] = useMember();
+    // console.log(isAdmin);
+    // console.log(isMember);
     return (
         <div className="flex max-w-6xl mx-auto ">
 
@@ -22,10 +27,11 @@ const Dashboard = () => {
                 <ul className="menu">
                     {
                         isAdmin ? <div>
-                            <li><NavLink to="/dashboard/adminProfile"><FaHome></FaHome>My Profile</NavLink></li>
+                            <li><NavLink to="/dashboard/adminProfile"><FaHome></FaHome>Admin Profile</NavLink></li>
                             <li><NavLink to="/dashboard/manageMembers"><FaUsers></FaUsers>Manage Members</NavLink></li>
-                            <li><NavLink to="/dashboard/manageItem"><FaAd></FaAd>Manage Item</NavLink></li>
-                            <li><NavLink to="/dashboard/manageBookings"><FaBook></FaBook>Manage Bookings</NavLink></li>
+                            <li><NavLink to="/dashboard/agreementManagement"><FaAd></FaAd>Agreement Management</NavLink></li>
+                            <li><NavLink to="/dashboard/makeAnnouncement"><GrAnnounce></GrAnnounce>Announcement</NavLink></li>
+                            <li><NavLink to="/dashboard/coupon"><RiCoupon4Fill></RiCoupon4Fill>Coupon</NavLink></li>
                         </div> : <div>
                             <li><NavLink to="/dashboard/memberProfile"><ImProfile></ImProfile>My Profile</NavLink></li>
                             <li><NavLink to="/dashboard/makePayment"><FaCalendar></FaCalendar>Make Payment</NavLink></li>

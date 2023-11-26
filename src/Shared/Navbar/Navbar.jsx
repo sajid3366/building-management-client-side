@@ -1,10 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { MdLogin, MdOutlineLogout } from "react-icons/md";
+import useAdmin from "../../hooks/useAdmin";
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
     const handleLogout = () => {
         return logOut()
     }
@@ -56,7 +57,7 @@ const Navbar = () => {
 
                                                 <h2 className="text-lg font-bold">{user.displayName}</h2>
                                                 <div>
-                                                    <NavLink className="btn btn-outline" to="/dashboard">Dashboard</NavLink>
+                                                    {/* <NavLink className="btn btn-outline" to="/dashboard">Dashboard</NavLink> */}
                                                     {
                                                         user && isAdmin && <li><Link to="/dashboard/adminProfile">Dashboard</Link></li>
 
