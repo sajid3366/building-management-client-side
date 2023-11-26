@@ -1,5 +1,5 @@
 // import { Helmet } from "react-helmet";
-import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaUtensils } from "react-icons/fa";
+import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaUsers, FaUtensils } from "react-icons/fa";
 import { FaAlignJustify } from "react-icons/fa6";
 import { ImProfile } from "react-icons/im";
 import { GrAnnounce } from "react-icons/gr";
@@ -8,7 +8,7 @@ import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
     // const [isAdmin] = useAdmin();
-    const isAdmin = false;
+    const isAdmin = true;
     console.log(isAdmin);
     return (
         <div className="flex max-w-6xl mx-auto ">
@@ -22,8 +22,8 @@ const Dashboard = () => {
                 <ul className="menu">
                     {
                         isAdmin ? <div>
-                            <li><NavLink to="/dashboard/adminHome"><FaHome></FaHome>My Profile</NavLink></li>
-                            <li><NavLink to="/dashboard/makePayment"><FaUtensils></FaUtensils>Make Payment</NavLink></li>
+                            <li><NavLink to="/dashboard/adminProfile"><FaHome></FaHome>My Profile</NavLink></li>
+                            <li><NavLink to="/dashboard/manageMembers"><FaUsers></FaUsers>Manage Members</NavLink></li>
                             <li><NavLink to="/dashboard/manageItem"><FaAd></FaAd>Manage Item</NavLink></li>
                             <li><NavLink to="/dashboard/manageBookings"><FaBook></FaBook>Manage Bookings</NavLink></li>
                         </div> : <div>

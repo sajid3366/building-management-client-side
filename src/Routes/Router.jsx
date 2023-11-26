@@ -10,6 +10,9 @@ import MemberProfile from "../Pages/Dashboard/MerberProfile/MemberProfile";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import Announcements from "../Pages/Dashboard/Announcements/Announcements";
 import MakePayment from "../Pages/Dashboard/MakePayment/MakePayment";
+import Payment from "../Pages/Dashboard/MakePayment/Payment";
+import ManageMembers from "../Pages/Dashboard/AdminFacility/ManageMembers/ManageMembers";
+import AdminProfile from "../Pages/Dashboard/AdminFacility/AdminProfile/AdminProfile";
 
 const router = createBrowserRouter([
     {
@@ -49,6 +52,10 @@ const router = createBrowserRouter([
                 element: <MakePayment></MakePayment>
             },
             {
+                path: 'pay/:id',
+                element: <Payment></Payment>
+            },
+            {
                 path: 'paymentHistory',
                 element: <PaymentHistory></PaymentHistory>
             },
@@ -56,6 +63,16 @@ const router = createBrowserRouter([
                 path: 'announcements',
                 element: <Announcements></Announcements>
             },
+
+            // for admin
+            {
+                path: 'adminProfile',
+                element: <AdminProfile></AdminProfile>
+            },
+            {
+                path: 'manageMembers',
+                element: <ManageMembers></ManageMembers>
+            }
 
         ]
     },

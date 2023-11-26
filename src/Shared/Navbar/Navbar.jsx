@@ -4,7 +4,7 @@ import { MdLogin, MdOutlineLogout } from "react-icons/md";
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
-
+    const isAdmin = true;
     const handleLogout = () => {
         return logOut()
     }
@@ -56,7 +56,15 @@ const Navbar = () => {
 
                                                 <h2 className="text-lg font-bold">{user.displayName}</h2>
                                                 <div>
-                                                    <NavLink className="btn btn-outline" to="/dashboard/memberProfile">Dashboard</NavLink>
+                                                    <NavLink className="btn btn-outline" to="/dashboard">Dashboard</NavLink>
+                                                    {
+                                                        user && isAdmin && <li><Link to="/dashboard/adminProfile">Dashboard</Link></li>
+
+                                                    }
+                                                    {
+                                                        user && !isAdmin && <li><Link to="/dashboard/memberProfile">Dashboard</Link></li>
+
+                                                    }
                                                 </div>
                                                 <div className="flex justify-center">
                                                     <button onClick={handleLogout} className="flex gap-2 justify-center items-center btn btn-outline">Logout<MdOutlineLogout></MdOutlineLogout></button>
