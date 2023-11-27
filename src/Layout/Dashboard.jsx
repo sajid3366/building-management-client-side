@@ -20,8 +20,8 @@ const Dashboard = () => {
 
             <div className="w-64 py-8 min-h-screen bg-orange-400 ">
                 <div className="text-center space-y-1 mb-8">
-                <h1 className="text-3xl uppercase  font">Smart Build</h1>
-                <h4 className="text-xl">Smart Solution</h4>
+                    <h1 className="text-3xl uppercase  font">Smart Build</h1>
+                    <h4 className="text-xl">Smart Solution</h4>
                 </div>
 
                 <ul className="menu">
@@ -32,10 +32,13 @@ const Dashboard = () => {
                             <li><NavLink to="/dashboard/agreementManagement"><FaAd></FaAd>Agreement Management</NavLink></li>
                             <li><NavLink to="/dashboard/makeAnnouncement"><GrAnnounce></GrAnnounce>Announcement</NavLink></li>
                             <li><NavLink to="/dashboard/coupon"><RiCoupon4Fill></RiCoupon4Fill>Coupon</NavLink></li>
-                        </div> : <div>
+                        </div> : isMember ? <div>
                             <li><NavLink to="/dashboard/memberProfile"><ImProfile></ImProfile>My Profile</NavLink></li>
                             <li><NavLink to="/dashboard/makePayment"><FaCalendar></FaCalendar>Make Payment</NavLink></li>
                             <li><NavLink to="/dashboard/paymentHistory"><FaList></FaList>Payment History</NavLink></li>
+                            <li><NavLink to="/dashboard/announcements"><GrAnnounce></GrAnnounce>Announcements</NavLink></li>
+                        </div> : <div>
+                            <li><NavLink to="/dashboard/userProfile"><ImProfile></ImProfile>My Profile</NavLink></li>
                             <li><NavLink to="/dashboard/announcements"><GrAnnounce></GrAnnounce>Announcements</NavLink></li>
                         </div>
 
@@ -44,7 +47,6 @@ const Dashboard = () => {
                     <div className="divider"></div>
                     <li><NavLink to="/"><FaHome></FaHome>Home</NavLink></li>
                     <li><NavLink to="/apartment"><FaAlignJustify></FaAlignJustify>Apartment</NavLink></li>
-                    <li><NavLink to="/order/contact"><FaEnvelope></FaEnvelope>Contact</NavLink></li>
 
                 </ul>
             </div>

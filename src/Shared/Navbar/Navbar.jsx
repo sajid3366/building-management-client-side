@@ -2,10 +2,12 @@ import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { MdLogin, MdOutlineLogout } from "react-icons/md";
 import useAdmin from "../../hooks/useAdmin";
+import useMember from "../../hooks/useMember";
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
     const [isAdmin] = useAdmin();
+    const [isMember] = useMember();
     const handleLogout = () => {
         return logOut()
     }
@@ -63,8 +65,11 @@ const Navbar = () => {
 
                                                     }
                                                     {
-                                                        user && !isAdmin && <li><Link to="/dashboard/memberProfile">Dashboard</Link></li>
+                                                        user && isMember && <li><Link to="/dashboard/memberProfile">Dashboard</Link></li>
 
+                                                    }
+                                                    {
+                                                        user && !isAdmin && !isMember && <li><Link to="/dashboard/userProfile">Dashboard</Link></li>
                                                     }
                                                 </div>
                                                 <div className="flex justify-center">

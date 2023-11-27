@@ -16,6 +16,7 @@ import AdminProfile from "../Pages/Dashboard/AdminFacility/AdminProfile/AdminPro
 import AdminAnnouncement from "../Pages/Dashboard/AdminFacility/AdminAnnouncement/AdminAnnouncement";
 import AgreementManagement from "../Pages/Dashboard/AdminFacility/AgreementManagement/AgreementManagement";
 import CouponManagement from "../Pages/Dashboard/AdminFacility/CouponManagement/CouponManagement";
+import UserProfile from "../Pages/Dashboard/UserFacility/UserProfile/UserProfile";
 
 const router = createBrowserRouter([
     {
@@ -45,6 +46,11 @@ const router = createBrowserRouter([
         path: 'dashboard',
         element: <Dashboard></Dashboard>,
         children: [
+            // 
+            {
+                path: 'userProfile',
+                element: <UserProfile></UserProfile>
+            },
             // member related work
             {
                 path: 'memberProfile',
