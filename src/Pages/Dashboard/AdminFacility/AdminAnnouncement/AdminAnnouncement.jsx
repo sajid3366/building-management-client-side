@@ -12,8 +12,6 @@ const AdminAnnouncement = () => {
         const announcement = {
             title, description
         }
-
-        console.log(announcement);
         axiosSecure.post('/announcement', announcement)
         .then(res =>{
             if(res.data.insertedId){
