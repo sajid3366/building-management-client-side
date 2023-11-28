@@ -2,14 +2,18 @@ import Swal from "sweetalert2";
 import Button from "../../Shared/Button/Button";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import DateObject from "react-date-object";
+
 
 const ApartmentCard = ({ apartment }) => {
     const { _id, apartmentImage, blockName, floorNo, apartmentNo, rent } = apartment;
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
-
+    var date = new DateObject();
+    const agreementReqDate = date.format();
     const handleAgreement = () => {
+
         if (user && user.email) {
             const newAgreement = {
                 name: user?.displayName,
@@ -18,9 +22,9 @@ const ApartmentCard = ({ apartment }) => {
                 blockName,
                 apartmentNo,
                 rent,
+                agreementReqDate,
                 status: 'pending'
             }
-            // console.log(newAgreement);
             axiosSecure.post('/agreement', newAgreement)
                 .then(res => {
                     if (res.data.insertedId) {

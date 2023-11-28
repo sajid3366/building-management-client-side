@@ -6,8 +6,8 @@ const MemberProfile = () => {
     return (
         <div className="">
             <SectionTitle heading="My Profile"></SectionTitle>
-            <div className="bg-[#F9F5F6] py-10 px-10 flex gap-10">
-                <img className="rounded-full w-[200px]" src={user?.photoURL} alt="" />
+            <div className="bg-[#F9F5F6] h-screen py-10 px-10 flex gap-10">
+                <img className="rounded-full h-[200px] w-[200px]" src={user?.photoURL} alt="" />
                 <div className="mt-10">
                     <h2 className="font-semibold">Full Name</h2>
                     <h2 className="text-xl">{user?.displayName}</h2>
