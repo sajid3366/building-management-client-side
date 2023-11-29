@@ -13,18 +13,24 @@ const AgreementManagement = () => {
         }
     })
 
-    const handleAcceptButton = (id) => {
-        // console.log('hello id', id);
+    const handleAcceptButton = (id, email) => {
+        // console.log('hello id', id,email);
         axiosSecure.patch(`agreement/admin/${id}`)
             .then(result => {
                 if (result.data.modifiedCount > 0) {
-                    // axiosSecure.
-                    Swal.fire({
-                        title: "Accepted",
-                        text: "Agreement Accepted",
-                        icon: "success"
-                    });
-                    refetch();
+                    axiosSecure.patch(`users/${email}`)
+                        .then(res => {
+                            if (res.data.modifiedCount > 0) {
+                                Swal.fire({
+                                    title: "Accepted",
+                                    text: "Agreement Accepted",
+                                    icon: "success"
+                                });
+                                refetch();
+                            }
+
+                        })
+
                 }
             })
     }
@@ -69,7 +75,7 @@ const AgreementManagement = () => {
                             </div>
                             <div className="card-actions mt-24">
 
-                                <button onClick={() => handleAcceptButton(agreement._id)} className='py-2 px-4 rounded-sm text-white cursor-pointer  bg-[#12486B]'>Accept</button>
+                                <button onClick={() => handleAcceptButton(agreement._id, agreement.email)} className='py-2 px-4 rounded-sm text-white cursor-pointer  bg-[#12486B]'>Accept</button>
                                 <button onClick={() => handleRejectButton(agreement._id)} className='py-2 px-4 rounded-sm text-white cursor-pointer  bg-red-700'>Reject</button>
                             </div>
                         </div>

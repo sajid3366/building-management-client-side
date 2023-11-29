@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
+import DateObject from "react-date-object";
 
 const CheckOutForm = () => {
     const stripe = useStripe();
@@ -15,31 +16,33 @@ const CheckOutForm = () => {
     const [clientSecret, setClientSecret] = useState('');
     const [transactionId, setTransactionId] = useState('')
     const axiosSecure = useAxiosSecure();
-    // const rent = 
+
     const navigate = useNavigate()
     const { data: agreements = [] } = useQuery({
         queryKey: ['user-payment'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/agreement/${user.email}`)
+            const res = await axiosSecure.get(`/agreement/member/${user.email}`)
             console.log(res.data);
             return res.data
-            
         }
     })
     console.log(agreements);
+    const rent = agreements.reduce((total, item) => total + item.rent, 0);
+    
 
-    // useEffect(() => {
-    //     if (totalPrice > 0) {
-    //         axiosSecure.post('/create-payment-intent', { price: totalPrice })
-    //             .then(res => {
-    //                 console.log(res.data.clientSecret);
-    //                 setClientSecret(res.data.clientSecret)
-    //             })
-    //             .catch(err => {
-    //                 console.log(err);
-    //             })
-    //     }
-    // }, [axiosSecure, totalPrice])
+
+    useEffect(() => {
+        if (rent > 0) {
+            axiosSecure.post('/create-payment-intent', { payment: rent })
+                .then(res => {
+                    console.log(res.data.clientSecret);
+                    setClientSecret(res.data.clientSecret)
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+    }, [axiosSecure, rent])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -87,20 +90,21 @@ const CheckOutForm = () => {
             if (paymentIntent.id) {
                 setTransactionId(paymentIntent.id)
                 console.log('transaction id', paymentIntent.id);
-
+                var date = new DateObject();
+                const paymentDate = date.format();
                 // save the payment in the database
                 const payment = {
                     email: user.email,
-                    // price: totalPrice,
+                    rent,
                     transactionId: paymentIntent.id,
-                    date: new Date(),
+                    paymentDate,
+                    month: '',
 
-                    status: 'pending'
                 }
                 const res = await axiosSecure.post('/payments', payment)
                 console.log('payment ', res.data);
                 // refetch();
-                if (res.data?.paymentResult?.insertedId) {
+                if (res.data?.insertedId) {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -134,7 +138,7 @@ const CheckOutForm = () => {
                         },
                     }}
                 />
-                <button className="btn btn-secondary mt-5" type="submit" disabled={!stripe}>
+                <button className="btn btn-secondary mt-5" type="submit" disabled={!stripe || !clientSecret}>
                     Pay
                 </button>
                 <p className="text-red-600">{error}</p>

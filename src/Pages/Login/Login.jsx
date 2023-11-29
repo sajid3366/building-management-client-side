@@ -32,10 +32,7 @@ const Login = () => {
         const form = new FormData(e.currentTarget);
         const email = form.get('email');
         const password = form.get('password');
-
-        console.log(email, password);
         setError('');
-
         logIn(email, password)
             .then(result => {
                 console.log(result.user);
@@ -48,6 +45,7 @@ const Login = () => {
             })
 
     }
+    
     return (
         <div className="my-12">
             <h2 className="text-3xl text-center">Please Login</h2>

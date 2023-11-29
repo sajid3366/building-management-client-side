@@ -2,14 +2,15 @@ import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Signup = () => {
     const { signUp } = useAuth();
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    const axiosPublic = useAxiosPublic()
+    const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate()
 
     const handleSignup = e => {
         e.preventDefault();
@@ -43,12 +44,9 @@ const Signup = () => {
 
         signUp(email, password)
             .then(result => {
-                console.log(result.user);
-
                 const user = {
                     name, email, password, photo
                 }
-                console.log(user);
                 axiosPublic.post('/users', user)
                     .then(res => {
                         console.log('user', res.data);
@@ -59,6 +57,7 @@ const Signup = () => {
                                 icon: 'success',
                                 confirmButtonText: 'OK'
                             })
+                            navigate('/')
                         }
                     })
                 updateProfile(result.user, {

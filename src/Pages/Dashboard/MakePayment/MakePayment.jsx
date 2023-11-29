@@ -13,23 +13,22 @@ const MakePayment = () => {
     const { data: apartments = [] } = useQuery({
         queryKey: ['payment'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/agreement/${user.email}`)
-            return res.data;
+            const res = await axiosSecure.get(`/agreement/member/${user.email}`)
+            return res.data;   
         }
+        
     })
 
     const updateAgreement = (e) => {
         const month = e.target.value;
-        // console.log(month);
         setInputValue(month)
     }
     const onClickFunction = (id) => {
-        // console.log(id, inputValue);
+        console.log(id);
         const month = { month: inputValue }
         axiosSecure.patch(`/agreement/${id}`, month)
             .then(res => {
                 console.log(res.data);
-                
             })
 
     }
@@ -44,7 +43,7 @@ const MakePayment = () => {
                         <div className="card-body">
 
                             <h2 className="font-semibold mt-2">Email Address</h2>
-                            <h2 className="text-xl mb-2">{user?.email}</h2>
+                            <h2 className="text-xl mb-2">{apartment.email}</h2>
                             <h2 className="text-2xl font-bold">{apartment.blockName}</h2>
                             <p className="text-lg font-medium">Floor no - {apartment.floorNo}</p>
                             <p className="text-lg font-medium ">Apartment no - {apartment.apartmentNo}</p>
@@ -67,7 +66,7 @@ const MakePayment = () => {
                             <div className="card-actions justify-between ">
                                 <p className="text-xl text-[#A1A1A1] font-semibold">${apartment.rent}</p>
                                 <Link to={`/dashboard/pay/${apartment._id}`}>
-                                    <div onClick={() => onClickFunction(apartment._id)}>
+                                    <div  onClick={() => onClickFunction(apartment._id)}>
                                         <Button title="Pay" ></Button>
                                     </div>
                                 </Link>
