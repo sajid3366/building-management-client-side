@@ -8,13 +8,14 @@ export const EmblaCarousel = () => {
         <div className="embla h-[80vh] rounded-sm" ref={emblaRef}>
             <div className="embla__container ">
                 <div className="embla__slide">
-                    <img src="https://i.ibb.co/47pCjR9/fc1f79e18cdc1a12320b9b10ec3e253d.jpg" alt="" />
+                    {/* <img src="https://i.ibb.co/47pCjR9/fc1f79e18cdc1a12320b9b10ec3e253d.jpg" alt="" /> */}
+                    <img src="https://i.ibb.co/mGWc5vt/huy-nguyen-AB-q9lw-CVv8-unsplash.jpg" alt="" />
                 </div>
                 <div className="embla__slide">
-                    <img src="https://i.ibb.co/18wyZ68/katie-musial-Jg-E6-SP0-U7e4-unsplash.jpg" alt="" />
+                    <img src="https://i.ibb.co/1mq2SN2/med-badr-chemmaoui-xt-Dp-Xi-a-YQ-unsplash.jpg" alt="" />
                 </div>
                 <div className="embla__slide">
-                    <img src="https://i.ibb.co/jkSZv76/goh-rhy-yan-f-SDCASisgs-unsplash.jpg" alt="" />
+                    <img src="https://i.ibb.co/GJTKNMf/point3d-commercial-imaging-ltd-ae-Tex-YQKsuk-unsplash.jpg" alt="" />
                 </div>
             </div>
         </div>
