@@ -12,14 +12,14 @@ const Apartment = () => {
     const pages = [...Array(numOfPages).keys()]
 
     useEffect(() => {
-        fetch(`http://localhost:5000/countApartment`)
+        fetch(`https://smart-build-server.vercel.app/countApartment`)
             .then(res => res.json())
             .then(data => {
                 setCount(data.count)
             })
     }, [])
     useEffect(() => {
-        fetch(`http://localhost:5000/apartments?page=${currentPage}&size=${apartmentPerPage}`)
+        fetch(`https://smart-build-server.vercel.app/apartments?page=${currentPage}&size=${apartmentPerPage}`)
             .then(res => res.json())
             .then(data => setApartments(data))
     }, [currentPage, apartmentPerPage]);
@@ -49,7 +49,7 @@ const Apartment = () => {
         <div className="my-12">
             <h2 className="text-center text-3xl font-semibold mb-4">Book Your Apartment <span className="text-red-500">NOW</span></h2>
             <hr className="max-w-lg border-2 mx-auto mb-10" />
-            <div className="grid grid-cols-3 gap-5">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {
                     apartments.map(apartment => <ApartmentCard key={apartment._id} apartment={apartment}></ApartmentCard> )
                 }

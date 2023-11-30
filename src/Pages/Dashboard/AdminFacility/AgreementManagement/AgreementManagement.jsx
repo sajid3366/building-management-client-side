@@ -54,7 +54,6 @@ const AgreementManagement = () => {
     return (
         <div>
             <SectionTitle heading={"agreement requests"}></SectionTitle>
-            <h2>length: {agreements.length}</h2>
 
             <div className=''>
                 {
